@@ -1,11 +1,10 @@
 package com.example.carbookingservice.api;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class BookingRequest {
     private String userId;
-    private String vehicleId;
+    private Integer vehicleId;
     private String currency;
     private double amount;
     private LocalDate startDate;
@@ -20,11 +19,11 @@ public class BookingRequest {
         this.userId = userId;
     }
 
-    public String getVehicleId() {
+    public Integer getVehicleId() {
         return vehicleId;
     }
 
-    public void setVehicleId(String vehicleId) {
+    public void setVehicleId(Integer vehicleId) {
         this.vehicleId = vehicleId;
     }
 

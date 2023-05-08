@@ -22,17 +22,7 @@ public class KafkaListeners {
         this.vehicleRepository = vehicleRepository;
     }
 
-    @KafkaListener(topics = "bookingCarRequestNotAvailable", groupId = "carGroup")
-    void setVehicleToNotAvailable(String data) {
-        System.out.println("Car Service: " + data);
-    }
-
-    @KafkaListener(topics = "bookingCarRequestAvailable", groupId = "carGroup")
-    void setVehicleToAvailable(String data) {
-        System.out.println("Car Service: " + data);
-    }
-
-    @KafkaListener(topics = "bookingCarResponses", groupId = "carGroup")
+    @KafkaListener(topics = "bookingCarCreate", groupId = "test")
     void createVehicleListener(String data) {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> carResponseDataJson;
@@ -42,12 +32,17 @@ public class KafkaListeners {
             e.printStackTrace();
             throw new RuntimeException("Fehler beim Konvertieren des JSON-Strings in eine Map<String, Object>.");
         }
+        System.out.println(data);
+        System.out.println(carResponseDataJson);
+        System.out.println(carResponseDataJson.get("carID").toString());
+        System.out.println(carResponseDataJson.get("name").toString());
+        System.out.println(carResponseDataJson.get("path").toString());
 
         Vehicles vehicles = new Vehicles();
-        vehicles.setVehicleId(carResponseDataJson.get("carID").toString());
+        Integer.getInteger((String) carResponseDataJson.get("carID"));
         vehicles.setName(carResponseDataJson.get("name").toString());
         vehicles.setPath(carResponseDataJson.get("path").toString());
-        vehicles.setAvailable((Boolean) carResponseDataJson.get("isAvaiable"));
+        vehicles.setAvailable((Boolean) carResponseDataJson.get("isAvailable"));
 
         vehicleRepository.save(vehicles);
     }

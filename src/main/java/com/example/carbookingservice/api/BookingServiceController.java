@@ -55,7 +55,18 @@ public class BookingServiceController {
         double basePrice = 0;
         // Get the vehicle and change the available status to false
         try {
-            kafkaTemplate.send("bookingCarRequestNotAvailable", bookingRequest.getVehicleId());
+            Map<String, Object> carData = new HashMap<>();
+            carData.put("carID", bookingRequest.getVehicleId().toString());
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            String carDataJsonString;
+            try {
+                carDataJsonString = objectMapper.writeValueAsString(carData);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Convertion error");
+            }
+            kafkaTemplate.send("bookingCarRequestNotAvailable", carDataJsonString);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -83,7 +94,6 @@ public class BookingServiceController {
                 ProducerRecord<String, String> record = new ProducerRecord<>("bookingCurrencyRequests", currencyDataJsonString);
                 RequestReplyFuture<String, String, String> replyFuture = replyingKafkaTemplate.sendAndReceive(record);
                 SendResult<String, String> sendResult = replyFuture.getSendFuture().get(30, TimeUnit.SECONDS);
-                System.out.println("Sent ok: " + sendResult.getRecordMetadata());
                 ConsumerRecord<String, String> consumerRecord = replyFuture.get(30, TimeUnit.SECONDS);
                 basePrice = Double.parseDouble(consumerRecord.value());
                 price = bookingRequest.getAmount();
@@ -129,9 +139,6 @@ public class BookingServiceController {
         rental.setInvoiceId(invoiceId);
         rentalsRepository.save(rental);
 
-        Vehicles vehicle = vehicleRepository.findByVehicleId(bookingRequest.getVehicleId()).orElseThrow();
-        vehicle.setAvailable(false);
-        vehicleRepository.save(vehicle);
 
         // Return response if everything is successful
         Map<String, Object> response = new HashMap<>();
@@ -158,7 +165,7 @@ public class BookingServiceController {
             Invoices invoice = invoicesRepository.findById(booking.getInvoiceId()).orElseThrow();
 
             // Fetch the vehicle data using the vehicle_id
-            Vehicles vehicles = vehicleRepository.findByVehicleId(booking.getVehicleId()).orElseThrow();
+            Vehicles vehicles = vehicleRepository.findById(booking.getVehicleId()).orElseThrow();
 
             // Combine the booking, invoice, and vehicle data into a single map
             Map<String, Object> bookingData = new HashMap<>();
@@ -179,7 +186,7 @@ public class BookingServiceController {
         List<Map<String, Object>> data = new ArrayList<>();
 
         for (Rentals booking : bookings) {
-            Optional<Vehicles> vehicleOpt = vehicleRepository.findByVehicleId(booking.getVehicleId());
+            Optional<Vehicles> vehicleOpt = vehicleRepository.findById(booking.getVehicleId());
             if (vehicleOpt.isPresent()) {
                 Vehicles vehicle = vehicleOpt.get();
                 Map<String, Object> entry = new HashMap<>();
@@ -200,14 +207,23 @@ public class BookingServiceController {
             Rentals booking = bookingOpt.get();
 
             // Get the vehicle_id and change the available status to true
-            Vehicles vehicle = vehicleRepository.findByVehicleId(booking.getVehicleId()).orElseThrow();
-            vehicle.setAvailable(true);
-            vehicleRepository.save(vehicle);
+            Vehicles vehicle = vehicleRepository.findById(booking.getVehicleId()).orElseThrow();
 
             rentalsRepository.delete(booking);
 
             try {
-                kafkaTemplate.send("bookingCarRequestAvailable", vehicle.getVehicleId());
+                Map<String, Object> carData = new HashMap<>();
+                carData.put("carID", vehicle.getVehicleId());
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                String carDataJsonString;
+                try {
+                    carDataJsonString = objectMapper.writeValueAsString(carData);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Convertion error");
+                }
+                kafkaTemplate.send("bookingCarRequestAvailable", carDataJsonString);
             } catch (Exception e) {
                 e.printStackTrace();
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -228,12 +244,21 @@ public class BookingServiceController {
             Rentals booking = bookingOpt.get();
 
             // Get the vehicle_id and change the available status to true
-            Vehicles vehicle = vehicleRepository.findByVehicleId(booking.getVehicleId()).orElseThrow();
-            vehicle.setAvailable(true);
-            vehicleRepository.save(vehicle);
+            Vehicles vehicle = vehicleRepository.findById(booking.getVehicleId()).orElseThrow();
 
             try {
-                kafkaTemplate.send("bookingCarRequestAvailable", vehicle.getVehicleId());
+                Map<String, Object> carData = new HashMap<>();
+                carData.put("carID", vehicle.getVehicleId());
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                String carDataJsonString;
+                try {
+                    carDataJsonString = objectMapper.writeValueAsString(carData);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Convertion error");
+                }
+                kafkaTemplate.send("bookingCarRequestAvailable", carDataJsonString);
             } catch (Exception e) {
                 e.printStackTrace();
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

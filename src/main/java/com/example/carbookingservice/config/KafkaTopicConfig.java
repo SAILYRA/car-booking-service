@@ -34,7 +34,7 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic bookingCarResponsesTopic(){
-        return TopicBuilder.name("bookingCarResponses")
+        return TopicBuilder.name("bookingCarCreate")
                 .build();
     }
 }

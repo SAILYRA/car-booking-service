@@ -17,7 +17,7 @@ public class Rentals {
     private String customerId;
 
     @Column(name = "vehicle_id")
-    private String vehicleId;
+    private Integer vehicleId;
 
     @Column(name = "start_date")
     private LocalDate startDate;
@@ -55,11 +55,11 @@ public class Rentals {
         this.customerId = customerId;
     }
 
-    public String getVehicleId() {
+    public Integer getVehicleId() {
         return vehicleId;
     }
 
-    public void setVehicleId(String vehicleId) {
+    public void setVehicleId(Integer vehicleId) {
         this.vehicleId = vehicleId;
     }
 

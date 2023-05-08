@@ -11,7 +11,7 @@ public class Vehicles {
     private Integer id;
 
     @Column(name = "vehicle_id")
-    private String vehicleId;
+    private Integer vehicleId;
 
     @Column(name = "name")
     private String name;
@@ -30,11 +30,11 @@ public class Vehicles {
         this.id = id;
     }
 
-    public String getVehicleId() {
+    public Integer getVehicleId() {
         return vehicleId;
     }
 
-    public void setVehicleId(String vehicleId) {
+    public void setVehicleId(Integer vehicleId) {
         this.vehicleId = vehicleId;
     }
 
