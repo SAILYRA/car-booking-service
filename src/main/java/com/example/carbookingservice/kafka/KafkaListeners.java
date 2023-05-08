@@ -22,7 +22,7 @@ public class KafkaListeners {
         this.vehicleRepository = vehicleRepository;
     }
 
-    @KafkaListener(topics = "bookingCarCreate", groupId = "test")
+    @KafkaListener(topics = "bookingCarCreated", groupId = "test")
     void createVehicleListener(String data) {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> carResponseDataJson;
