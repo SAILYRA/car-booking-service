@@ -11,13 +11,13 @@ public class Rentals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rental_id")
-    private Long rentalId;
+    private Integer rentalId;
 
     @Column(name = "customer_id")
-    private Long customerId;
+    private String customerId;
 
     @Column(name = "vehicle_id")
-    private Long vehicleId;
+    private String vehicleId;
 
     @Column(name = "start_date")
     private LocalDate startDate;
@@ -29,7 +29,7 @@ public class Rentals {
     private Integer totalDays;
 
     @Column(name = "invoice_id")
-    private Long invoiceId;
+    private Integer invoiceId;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -39,27 +39,27 @@ public class Rentals {
 
     // Getters and setters for all properties
 
-    public Long getRentalId() {
+    public Integer getRentalId() {
         return rentalId;
     }
 
-    public void setRentalId(Long rentalId) {
+    public void setRentalId(Integer rentalId) {
         this.rentalId = rentalId;
     }
 
-    public Long getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Long customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
-    public Long getVehicleId() {
+    public String getVehicleId() {
         return vehicleId;
     }
 
-    public void setVehicleId(Long vehicleId) {
+    public void setVehicleId(String vehicleId) {
         this.vehicleId = vehicleId;
     }
 
@@ -87,11 +87,11 @@ public class Rentals {
         this.totalDays = totalDays;
     }
 
-    public Long getInvoiceId() {
+    public Integer getInvoiceId() {
         return invoiceId;
     }
 
-    public void setInvoiceId(Long invoiceId) {
+    public void setInvoiceId(Integer invoiceId) {
         this.invoiceId = invoiceId;
     }
 

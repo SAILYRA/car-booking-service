@@ -1,7 +1,6 @@
 package com.example.carbookingservice.entity;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -12,19 +11,19 @@ public class Invoices {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "invoice_id")
-    private Long invoiceId;
+    private Integer invoiceId;
 
     @Column(name = "customer_id")
-    private Long customerId;
+    private String customerId;
 
-    @Column(name = "total_amount", precision = 8, scale = 2)
-    private BigDecimal totalAmount;
+    @Column(name = "total_amount")
+    private double totalAmount;
 
     @Column(name = "original_currency")
     private String originalCurrency;
 
-    @Column(name = "total_amount_selected_currency", precision = 8, scale = 2)
-    private BigDecimal totalAmountSelectedCurrency;
+    @Column(name = "total_amount_selected_currency")
+    private double totalAmountSelectedCurrency;
 
     @Column(name = "selected_currency")
     private String selectedCurrency;
@@ -37,34 +36,34 @@ public class Invoices {
     private PaymentStatus paymentStatus;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     // Getters and setters for all properties
 
-    public Long getInvoiceId() {
+    public Integer getInvoiceId() {
         return invoiceId;
     }
 
-    public void setInvoiceId(Long invoiceId) {
+    public void setInvoiceId(Integer invoiceId) {
         this.invoiceId = invoiceId;
     }
 
-    public Long getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Long customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
-    public BigDecimal getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -76,11 +75,11 @@ public class Invoices {
         this.originalCurrency = originalCurrency;
     }
 
-    public BigDecimal getTotalAmountSelectedCurrency() {
+    public double getTotalAmountSelectedCurrency() {
         return totalAmountSelectedCurrency;
     }
 
-    public void setTotalAmountSelectedCurrency(BigDecimal totalAmountSelectedCurrency) {
+    public void setTotalAmountSelectedCurrency(double totalAmountSelectedCurrency) {
         this.totalAmountSelectedCurrency = totalAmountSelectedCurrency;
     }
 
@@ -108,11 +107,11 @@ public class Invoices {
         this.paymentStatus = paymentStatus;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
