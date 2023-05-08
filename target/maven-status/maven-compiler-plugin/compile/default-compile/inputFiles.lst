@@ -1,0 +1,13 @@
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/config/KafkaTopicConfig.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/entity/Rentals.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/api/BookingRequest.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/config/KafkaConsumerConfig.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/CarBookingServiceApplication.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/repository/InvoicesRepository.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/entity/Vehicles.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/config/KafkaProducerConfig.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/entity/Invoices.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/api/BookingServiceController.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/repository/VehicleRepository.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/repository/RentalsRepository.java
+/Applications/MAMP/htdocs/car-booking-service/src/main/java/com/example/carbookingservice/kafka/KafkaListeners.java
