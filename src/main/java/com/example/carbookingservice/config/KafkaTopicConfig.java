@@ -9,8 +9,32 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
     @Bean
-    public NewTopic bookingServiceTopic(){
-        return TopicBuilder.name("bookingService")
+    public NewTopic bookingCurrencyRequestsTopic(){
+        return TopicBuilder.name("bookingCurrencyRequests")
+                .build();
+    }
+
+    @Bean
+    public NewTopic bookingCurrencyResponsesTopic(){
+        return TopicBuilder.name("bookingCurrencyResponses")
+                .build();
+    }
+
+    @Bean
+    public NewTopic bookingCarRequestAvailableTopic(){
+        return TopicBuilder.name("bookingCarRequestAvailable")
+                .build();
+    }
+
+    @Bean
+    public NewTopic bookingCarRequestNotAvailableTopic(){
+        return TopicBuilder.name("bookingCarRequestNotAvailable")
+                .build();
+    }
+
+    @Bean
+    public NewTopic bookingCarResponsesTopic(){
+        return TopicBuilder.name("bookingCarCreate")
                 .build();
     }
 }
